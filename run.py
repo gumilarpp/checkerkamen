@@ -29,7 +29,7 @@ def _configure_proxy():
         print("[*] Tanpa proxy — system proxy dinonaktifkan.")
 
 def main():
-    token = os.environ.get("TELEGRAM_BOT_TOKEN", "8999799756:AAGYO8-WmZilA82kXfV1zOSmGacQztya_D4").strip()
+    token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
     if not token:
         print("=" * 50)
         token = input("Masukkan Telegram Bot Token: ").strip()
