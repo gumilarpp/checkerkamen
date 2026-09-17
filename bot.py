@@ -211,6 +211,7 @@ def _login_keyboard(result: dict) -> InlineKeyboardMarkup | None:
         return InlineKeyboardMarkup([[
             InlineKeyboardButton("🖥️ PC Login",    url=nft["pc_url"]),
             InlineKeyboardButton("📱 Phone Login", url=nft["mobile_url"]),
+            InlineKeyboardButton("📺 TV Login",   url=nft["tv_url"]),
         ]])
     return None
 
@@ -867,6 +868,7 @@ async def send_hits_zip(update: Update, hits: list[tuple[dict, str, str]]) -> No
         if nft.get("success"):
             lines.append(box_line("PC Login:", nft.get("pc_url", "")))
             lines.append(box_line("Mobile Login:", nft.get("mobile_url", "")))
+            lines.append(box_line("TV Login:", nft.get("tv_url", "")))
             if nft.get("expires"):
                 lines.append(box_line("Expires:", nft["expires"]))
         else:
@@ -1552,6 +1554,7 @@ def _nav_keyboard(nav_key: str, page: int, total: int, result: dict) -> InlineKe
         rows.append([
             InlineKeyboardButton("🖥️ PC Login",    url=nft["pc_url"]),
             InlineKeyboardButton("📱 Phone Login", url=nft["mobile_url"]),
+            InlineKeyboardButton("📺 TV Login",   url=nft["tv_url"]),
         ])
     return InlineKeyboardMarkup(rows)
 
@@ -1705,6 +1708,7 @@ async def loginlinks_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
                 "  ── LOGIN LINKS ──────────────────────────────────────",
                 f"  PC Login:   {nft.get('pc_url', '')}",
                 f"  Mobile:     {nft.get('mobile_url', '')}",
+                f"  TV Login:   {nft.get('tv_url', '')}",
             ]
             if nft.get("expires"):
                 lines.append(f"  Expires:    {nft['expires']}")
@@ -1756,6 +1760,7 @@ async def loginlinks_callback(update: Update, context: ContextTypes.DEFAULT_TYPE
             if nft.get("success"):
                 content.append(f"# PC Login:     {nft.get('pc_url', '')}")
                 content.append(f"# Mobile Login: {nft.get('mobile_url', '')}")
+                content.append(f"# TV Login:     {nft.get('tv_url', '')}")
             folder = "premium/" if "premium" in plan.lower() else "hits/"
             zf.writestr(f"{folder}{i:02d}_{safe}_{plan}.txt", "\n".join(content))
 

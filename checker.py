@@ -544,6 +544,7 @@ def generate_nftoken(cookies: dict) -> dict:
             "success": True,
             "pc_url": f"https://netflix.com/?nftoken={token}",
             "mobile_url": f"https://netflix.com/unsupported?nftoken={token}",
+            "tv_url": f"https://netflix.com/tv2?nftoken={token}",
             "expires": str(expires) if expires else None,
             "error": None,
         }
