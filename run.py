@@ -22,9 +22,7 @@ def _configure_proxy() -> None:
         print("[*] Tanpa proxy — system proxy dinonaktifkan (non-interactive mode).")
         return
 
-    proxy = input(
-        "Proxy (Enter jika tidak pakai, contoh: socks5://127.0.0.1:7890): "
-    ).strip()
+    proxy = ""
 
     if proxy:
         os.environ["HTTPS_PROXY"] = proxy
