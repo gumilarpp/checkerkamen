@@ -2430,6 +2430,10 @@ def main() -> None:
 
     ptb_app.post_init = _post_init
     print("✅ Netflix Cookie Checker Bot is running (polling mode)…")
+    # Ensure an event loop exists in this thread before run_polling internally
+    # calls asyncio.get_event_loop() (Python 3.14 raises if none is set).
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
     ptb_app.run_polling(
         drop_pending_updates=True,
         allowed_updates=["message", "callback_query"],

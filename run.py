@@ -6,11 +6,20 @@ _PROXY_KEYS = [
     "https_proxy", "http_proxy", "all_proxy",
 ]
 
-def _configure_proxy():
+def _configure_proxy() -> None:
     # If user already set a proxy via env var, use it directly (no prompt)
     explicit = next((os.environ[k] for k in _PROXY_KEYS if os.environ.get(k)), "")
     if explicit:
         print(f"[*] Proxy: {explicit}")
+        return
+
+    # Non-interactive fallback: if stdin is not a TTY (e.g. background/headless),
+    # just clear proxy env vars and move on — no prompt.
+    if not sys.stdin.isatty():
+        for k in _PROXY_KEYS:
+            os.environ.pop(k, None)
+        os.environ["NO_PROXY"] = "*"
+        print("[*] Tanpa proxy — system proxy dinonaktifkan (non-interactive mode).")
         return
 
     proxy = input(
